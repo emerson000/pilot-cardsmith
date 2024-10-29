@@ -55,3 +55,5 @@ group :test do
 end
 
 gem "active_model_serializers"
+
+gem "importmap-rails", "~> 2.0"
