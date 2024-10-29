@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Api::CategoriesController < ApplicationController
     def index
         categories = Category.where(parent: nil).all
         render json: categories
@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     def create
         category = Category.new(category_params)
         if category.save
-          render json: category
+            render json: category
         else
             render json: { errors: category.errors.full_messages }, status: :unprocessable_entity
         end
@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
     def update
         category = Category.find(params[:id])
         if category.update(category_params)
-          render json: category
+            render json: category
         else
             render json: { errors: category.errors.full_messages }, status: :unprocessable_entity
         end

@@ -1,4 +1,4 @@
-class SourcesController < ApplicationController
+class Api::SourcesController < ApplicationController
   def index
     sources = Source.all
     render json: sources
