@@ -17,4 +17,6 @@ Rails.application.routes.draw do
     resources :sources
     resources :questions
   end
+
+  resources :categories
 end
