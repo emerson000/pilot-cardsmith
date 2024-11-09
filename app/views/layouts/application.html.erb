@@ -17,12 +17,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
-
   </head>
-
   <body>
     <%= render 'layouts/navbar' %>
-    <%= yield %>
+    <div class="grid-container">
+      <%= yield %>
+    </div>
     <script>
       $(document).foundation();
     </script>
