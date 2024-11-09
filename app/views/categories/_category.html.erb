@@ -1,7 +1,14 @@
 <tr>
     <td><%= category.name %></td>
     <td><%= category.parent_id %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+        <div class="button-group">
+            <%= link_to 'Show', category, class: "button" %>
+            <%= link_to 'Edit', edit_category_path(category), class: "button" %>
+            <%= link_to 'Delete', category, class: "button", data: {
+                turbo_confirm: 'Are you sure?',
+                turbo_method: :delete
+            } %>
+        </div>
+    </td>
 </tr>
