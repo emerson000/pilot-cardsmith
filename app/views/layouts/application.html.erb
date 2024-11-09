@@ -8,7 +8,9 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-
+    <script src=" https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    "application", 'data-turbo-track': 'reload'  %>
     <%= javascript_importmap_tags %>
     <%= csrf_meta_tags %>
