@@ -60,8 +60,4 @@ gem "importmap-rails", "~> 2.0"
 
 gem "simple_form"
 
-gem "foundation-rails"
-
 gem "dartsass-rails", "~> 0.5.1"
-
-gem "jquery-rails", "~> 4.6"
