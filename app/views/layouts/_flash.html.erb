@@ -1,0 +1,7 @@
+<turbo-frame id="flash">
+  <% flash.each do |type, message| %>
+    <div class="callout <%= case type when 'notice' then 'primary' else type end %>">
+        <p><%= message %></p>
+    </div>
+  <% end %>
+</turbo-frame>
