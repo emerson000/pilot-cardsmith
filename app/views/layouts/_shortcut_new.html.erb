@@ -1,0 +1,10 @@
+<script>
+    $(document).ready(function() {
+        $(document).on('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && e.key === 'n') {
+                e.preventDefault();
+                Turbo.visit("<%= path %>");
+            }
+        });
+    });
+</script>
