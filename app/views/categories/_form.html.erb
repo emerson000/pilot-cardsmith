@@ -1,6 +1,6 @@
 <%= simple_form_for @category do |f| %>
     <%= render 'layouts/flash' %>
-    <%= f.input :name %>
+    <%= f.input :name, autofocus: true %>
     <%= f.association :parent %>
     <%= f.button :submit %>
 <% end %>
