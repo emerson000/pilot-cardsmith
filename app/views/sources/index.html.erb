@@ -1,0 +1,14 @@
+<h1>Sources</h1>
+<%= link_to 'New Source', new_source_path, class: 'button' %>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <%= render @sources %>
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+<tr>
+    <td><%= source.title %></td>
+    <td>
+        <div class="button-group">
+            <%= link_to 'Show', source, class: "button" %>
+            <%= link_to 'Edit', edit_source_path(source), class: "button" %>
+            <%= link_to 'Delete', source, class: "button", data: {
+                turbo_confirm: 'Are you sure?',
+                turbo_method: :delete
+            } %>
+        </div>
+    </td>
+</tr>
