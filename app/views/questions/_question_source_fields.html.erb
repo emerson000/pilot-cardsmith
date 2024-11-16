@@ -1,0 +1,8 @@
+<div class="grid-x grid-padding-x align-bottom new-row">
+    <div class="medium-8 cell">
+        <%= form.collection_select :source_id, QuestionSource.all, :id, :name, prompt: 'Select a Source' %>
+    </div>
+    <div class="medium-4 cell">
+        <%= link_to_remove_nested form, link_text: 'Remove', link_classes: 'button', fields_wrapper_selector: '.new-row', tag: 'button' %>
+    </div>
+</div>

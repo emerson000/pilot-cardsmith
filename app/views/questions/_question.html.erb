@@ -1,0 +1,13 @@
+<tr>
+    <td><%= question.text %></td>
+    <td>
+        <div class="button-group">
+            <%= link_to 'Show', question, class: "button" %>
+            <%= link_to 'Edit', edit_question_path(question), class: "button" %>
+            <%= link_to 'Delete', question, class: "button", data: {
+                turbo_confirm: 'Are you sure?',
+                turbo_method: :delete
+            } %>
+        </div>
+    </td>
+</tr>

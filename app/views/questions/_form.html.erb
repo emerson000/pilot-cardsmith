@@ -1,0 +1,59 @@
+<%= simple_form_for @question, html: { id: 'question-form' } do |f| %>
+    <%= f.input :text, label: 'Question', autofocus: true %>
+    <ul class="tabs" data-tabs id="question-tabs">
+        <li class="tabs-title is-active"><a href="#answersTab" aria-selected="true">Answers</a></li>
+        <li class="tabs-title">
+            <a data-tabs-target="taxonomy" href="#taxonmy">Taxonomy</a>
+        </li>
+    </ul>
+    <div class="tabs-content" data-tabs-content="question-tabs">
+        <div class="tabs-panel is-active" id="answersTab">
+            <div id="answer-choices">
+                <%= f.fields_for :answer_choices do |answer_choice| %>
+                    <%= render 'answer_choice_fields', form: answer_choice %>
+                <% end %>
+            </div>
+            <%= link_to_add_nested f, :answer_choices, '#answer-choices', link_text: 'Add Answer', link_classes: 'button', tag: 'button' %>
+            <%= f.input :explanation %>
+        </div>
+        <div class="tabs-panel" id="taxonomy">
+            <h2>Categories</h2>
+            <div id="category-form">
+                <%= f.fields_for :question_categories do |question_category| %>
+                    <%= render 'question_category_fields', form: question_category %>
+                <% end %>
+            </div>
+            <%= link_to_add_nested f, :question_categories, '#category-form', link_text: 'Add Category', link_classes: 'button', tag: 'button' %>
+
+            <h2>Sources</h2>
+            <div id="sources-form">
+                <%= f.fields_for :question_sources do |question_source| %>
+                    <%= render 'question_source_fields', form: question_source %>
+                <% end %>
+            </div>
+            <%= link_to_add_nested f, :question_sources, '#sources-form', link_text: 'Add Source', link_classes: 'button', tag: 'button' %>
+        </div>
+    </div>
+    <br/>
+    <%= f.button :submit %>
+<% end %>
+<script>
+    $(document).ready(function() {
+        $(document).on('keydown', function(e) {
+            // Check if Ctrl + Alt + S is pressed
+            if (e.ctrlKey && e.altKey && e.key === 's') {
+                e.preventDefault();
+                $('#question-form').submit();
+            }
+        });
+        $('#answer-choices input[name^="question[answer_choices_attributes]"].string').on('keydown', function(e) {
+            if(e.key == 'Enter') {
+                e.preventDefault();
+                var nextInput = $(this).closest('#answer-choices').find('input[name^="question[answer_choices_attributes]"].string').eq($(this).index('#answer-choices input[name^="question[answer_choices_attributes]"].string') + 1);
+                if (nextInput.length) {
+                    nextInput.focus();
+                }
+            }
+        });
+    });
+</script>

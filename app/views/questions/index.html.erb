@@ -1,0 +1,16 @@
+<h1>Questions</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <%= render @questions %>
+    </tbody>
+</table>
+
+<br>
+<%= link_to 'New Question', new_question_path %>

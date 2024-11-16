@@ -1,0 +1,10 @@
+<h1><%= @question.text %></h1>
+<table>
+<% @question.answer_choices.each do |answer| %>
+    <tr>
+        <td><%= answer.text %></td>
+    </tr>
+<% end %>
+</table>
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

@@ -61,3 +61,5 @@ gem "importmap-rails", "~> 2.0"
 gem "simple_form"
 
 gem "dartsass-rails", "~> 0.5.1"
+
+gem "vanilla_nested"
