@@ -1,4 +1,6 @@
 <h1>Questions</h1>
+<%= render 'layouts/flash' %>
+<%= link_to 'New Question', new_question_path, class: 'button' %>
 <table>
     <thead>
         <tr>
@@ -11,6 +13,3 @@
         <%= render @questions %>
     </tbody>
 </table>
-
-<br>
-<%= link_to 'New Question', new_question_path %>

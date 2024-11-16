@@ -1,4 +1,6 @@
 <h1>Categories</h1>
+<%= render 'layouts/flash' %>
+<%= link_to 'New Category', new_category_path, class: 'button' %>
 <table>
     <thead>
         <tr>
@@ -12,6 +14,3 @@
         <%= render @categories %>
     </tbody>
 </table>
-
-<br>
-<%= link_to 'New Category', new_category_path %>

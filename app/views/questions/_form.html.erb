@@ -1,4 +1,5 @@
 <%= simple_form_for @question, html: { id: 'question-form' } do |f| %>
+    <%= render 'layouts/flash' %>
     <%= f.input :text, label: 'Question', autofocus: true %>
     <ul class="tabs" data-tabs id="question-tabs">
         <li class="tabs-title is-active"><a href="#answersTab" aria-selected="true">Answers</a></li>
