@@ -2,12 +2,14 @@
     <td><%= question.text %></td>
     <td>
         <div class="button-group">
-            <%= link_to 'Show', question, class: "button" %>
-            <%= link_to 'Edit', edit_question_path(question), class: "button" %>
-            <%= link_to 'Delete', question, class: "button", data: {
-                turbo_confirm: 'Are you sure?',
-                turbo_method: :delete
-            } %>
+            <%= link_to 'View', question, class: "button" %>
+            <% if user_signed_in? %>
+                <%= link_to 'Edit', edit_question_path(question), class: "button" %>
+                <%= link_to 'Delete', question, class: "button", data: {
+                    turbo_confirm: 'Are you sure?',
+                    turbo_method: :delete
+                } %>
+            <% end %>
         </div>
     </td>
 </tr>

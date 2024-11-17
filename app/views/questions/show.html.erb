@@ -7,5 +7,5 @@
     </tr>
 <% end %>
 </table>
-<%= link_to 'Edit', edit_question_path(@question), class: 'button' %>
+<%= user_signed_in? ? link_to('Edit', edit_question_path(@question), class: 'button') : '' %>
 <%= link_to 'Back', questions_path, class: 'button' %>
