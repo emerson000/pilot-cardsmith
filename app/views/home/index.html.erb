@@ -1,1 +1,12 @@
-Hello world. 123
+<%= render 'layouts/flash' %>
+<div class="grid-container margin-top-1">
+        <div class="grid-x grid-padding-x align-center">
+            <div class="cell small-12 medium-10 large-8 callout">
+                <h1>Cardsmith</h1>
+                <p>
+                    A work-in-progress database of study questions for the FAA knowledge tests.
+                </p>
+                <%= link_to 'Browse Cards', questions_path, class: 'button large' %>
+            </div>
+        </div>
+    </div>
