@@ -64,3 +64,5 @@ gem "simple_form"
 gem "dartsass-rails", "~> 0.5.1"
 
 gem "vanilla_nested"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
