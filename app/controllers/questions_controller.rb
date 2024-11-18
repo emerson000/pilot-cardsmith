@@ -6,6 +6,12 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+
+    # Find the next post by id, if it exists
+    @next_question = Question.where("id > ?", @question.id).order(:id).first
+
+    # If there is no next post, loop back to the first post
+    @next_question ||= Question.order(:id).first
   end
 
   def new
@@ -23,7 +29,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     if @question.update(question_params)
-      redirect_to questions_path, notice: "Question was successfully updated."
+      redirect_to question_url(@question), notice: "Question was successfully updated."
     else
       render :edit
     end

@@ -14,3 +14,36 @@
  *= require_self
 
  */
+@mixin no-select {
+    /* Standard syntax */
+    user-select: none;
+    /* Chrome, Safari */
+    -webkit-user-select: none;
+    /* Firefox */
+    -moz-user-select: none;
+    /* Internet Explorer/Edge */
+    -ms-user-select: none;
+}
+
+a.button i {
+    margin-right: 0.25em;
+}
+
+table.hover {
+    cursor: pointer;
+}
+
+table tr.answer-option {
+    @include no-select;
+    font-size: 1.25em;
+}
+
+.fa-solid {
+    &.red {
+        color: #e50615;
+    }
+
+    &.green {
+        color: #21b723;
+    }
+}
