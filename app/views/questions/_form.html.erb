@@ -1,5 +1,8 @@
 <%= simple_form_for @question, html: { id: 'question-form' } do |f| %>
-    <%= f.button :submit, 'Save' %>
+    <div class="button-group no-gaps">
+        <%= f.button :submit, 'Save' %>
+        <%= link_to 'Cancel', :back, class: 'button hollow' %>
+    </div>
     <%= render 'layouts/flash' %>
     <%= f.input :text, label: 'Question', autofocus: true %>
     <ul class="tabs" data-tabs id="question-tabs">
@@ -15,7 +18,7 @@
                     <%= render 'answer_choice_fields', form: answer_choice %>
                 <% end %>
             </div>
-            <%= link_to_add_nested f, :answer_choices, '#answer-choices', link_text: 'Add Answer', link_classes: 'button', tag: 'button' %>
+            <%= link_to_add_nested f, :answer_choices, '#answer-choices', link_text: 'Add Answer', link_classes: 'button small hollow secondary', tag: 'button' %>
             <%= f.input :explanation %>
         </div>
         <div class="tabs-panel" id="taxonomy">
@@ -25,7 +28,7 @@
                     <%= render 'question_category_fields', form: question_category %>
                 <% end %>
             </div>
-            <%= link_to_add_nested f, :question_categories, '#category-form', link_text: 'Add Category', link_classes: 'button', tag: 'button' %>
+            <%= link_to_add_nested f, :question_categories, '#category-form', link_text: 'Add Category', link_classes: 'button hollow small secondary', tag: 'button' %>
 
             <h2>Sources</h2>
             <div id="sources-form">
@@ -33,7 +36,7 @@
                     <%= render 'question_source_fields', form: question_source %>
                 <% end %>
             </div>
-            <%= link_to_add_nested f, :question_sources, '#sources-form', link_text: 'Add Source', link_classes: 'button', tag: 'button' %>
+            <%= link_to_add_nested f, :question_sources, '#sources-form', link_text: 'Add Source', link_classes: 'button hollow small secondary', tag: 'button' %>
         </div>
     </div>
 <% end %>
