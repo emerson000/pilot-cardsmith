@@ -5,7 +5,7 @@
 <%= user_signed_in? ? link_to("<i class=\"fa-solid fa-pen\"></i> Edit".html_safe, edit_question_path(@question), class: 'button') : '' %>
 </div>
 <table class="hover">
-<% @question.answer_choices.each_with_index do |answer, index| %>
+<% @question.answer_choices.shuffle.each_with_index do |answer, index| %>
     <tr class="answer-option">
         <td>
             <%= ('A'.ord + index).chr %>) 
@@ -27,7 +27,11 @@
 </div>
 <% end %>
 <div class="button-group hollow align-right">
-    <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+    <% if session[:shuffle] %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, next_random_question_path(@question), class: 'button' %>
+    <% else %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+    <% end %>
 </div>
 <script>
 $(document).ready(function() {

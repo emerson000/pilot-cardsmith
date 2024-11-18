@@ -1,12 +1,15 @@
 <h1>Questions</h1>
 <%= render 'layouts/flash' %>
-<%= user_signed_in? ? link_to('New Question', new_question_path, class: 'button') : '' %>
+<div class="button-group no-gaps">
+    <%= user_signed_in? ? link_to('New Question', new_question_path, class: 'button') : '' %>
+    <%= link_to '<i class="fa-solid fa-shuffle"></i> Shuffle'.html_safe, shuffle_questions_path, class: 'button hollow secondary' %>
+</div>
 <style>
     tr[data-url] {
         cursor: pointer;
     }
 </style>
-<table class="hover" id="question-index">
+<table class="stack hover" id="question-index">
     <thead>
         <tr>
             <th>Question</th>
