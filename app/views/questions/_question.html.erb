@@ -1,11 +1,11 @@
-<tr>
+<tr data-url="<%= question_url(question) %>">
     <td><%= question.text %></td>
     <td>
-        <div class="button-group">
-            <%= link_to 'View', question, class: "button" %>
+        <div class="button-group hollow small no-gaps" style="margin: 0">
+            <%= link_to 'View', question_path(question), class: "button" %>
             <% if user_signed_in? %>
                 <%= link_to 'Edit', edit_question_path(question), class: "button" %>
-                <%= link_to 'Delete', question, class: "button", data: {
+                <%= link_to "<i class=\"fa-solid fa-trash\"></i> Delete".html_safe, question, class: "button alert", data: {
                     turbo_confirm: 'Are you sure?',
                     turbo_method: :delete
                 } %>

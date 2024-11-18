@@ -1,4 +1,5 @@
 <%= simple_form_for @question, html: { id: 'question-form' } do |f| %>
+    <%= f.button :submit, 'Save' %>
     <%= render 'layouts/flash' %>
     <%= f.input :text, label: 'Question', autofocus: true %>
     <ul class="tabs" data-tabs id="question-tabs">
@@ -35,8 +36,6 @@
             <%= link_to_add_nested f, :question_sources, '#sources-form', link_text: 'Add Source', link_classes: 'button', tag: 'button' %>
         </div>
     </div>
-    <br/>
-    <%= f.button :submit %>
 <% end %>
 <script>
     $(document).ready(function() {

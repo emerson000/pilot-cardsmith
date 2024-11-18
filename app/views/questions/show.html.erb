@@ -1,11 +1,39 @@
 <h1><%= @question.text %></h1>
 <%= render 'layouts/flash' %>
-<table>
-<% @question.answer_choices.each do |answer| %>
-    <tr>
-        <td><%= answer.text %></td>
+<div class="button-group hollow no-gaps">
+<%= link_to "<i class=\"fa-solid fa-chevron-left\"></i> Back".html_safe, questions_path, class: 'button align-right' %>
+<%= user_signed_in? ? link_to("<i class=\"fa-solid fa-pen\"></i> Edit".html_safe, edit_question_path(@question), class: 'button') : '' %>
+</div>
+<table class="hover">
+<% @question.answer_choices.each_with_index do |answer, index| %>
+    <tr class="answer-option">
+        <td>
+            <%= ('A'.ord + index).chr %>) 
+            <%= answer.text %>
+            <span style="display: none;" class="question-answer"<%= answer.is_correct ? ' data-correct="true"' : ''%>>
+                <%= answer.is_correct ? '<i class="fa-solid fa-circle-check green"></i>'.html_safe : 
+                    '<i class="fa-solid fa-circle-xmark red"></i>'.html_safe 
+                %>
+            </span>
+        </td>
     </tr>
 <% end %>
 </table>
-<%= user_signed_in? ? link_to('Edit', edit_question_path(@question), class: 'button') : '' %>
-<%= link_to 'Back', questions_path, class: 'button' %>
+<% if @question.explanation? %>
+<div class="primary callout" style="display: none" id="question-explanation">
+    <p>
+        <%= @question.explanation %>
+    </p>
+</div>
+<% end %>
+<div class="button-group hollow align-right">
+    <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+</div>
+<script>
+$(document).ready(function() {
+    $('.answer-option').on('click', function() {
+        $(this).find('.question-answer').toggle();
+        $('#question-explanation').show();
+    });
+});
+</script>
