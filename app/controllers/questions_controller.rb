@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   def index
+    session[:shuffle] = false
     @questions = Question.all
   end
 
@@ -12,6 +13,18 @@ class QuestionsController < ApplicationController
 
     # If there is no next post, loop back to the first post
     @next_question ||= Question.order(:id).first
+  end
+
+  def shuffle
+    session[:shuffle] = true
+    random_question = Question.order("RANDOM()").first
+    redirect_to question_path(random_question)
+  end
+
+  def next_random
+    current_question = Question.find(params[:id])
+    next_question = Question.where.not(id: current_question.id).order("RANDOM()").first
+    redirect_to question_path(next_question)
   end
 
   def new

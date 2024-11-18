@@ -27,7 +27,11 @@
 </div>
 <% end %>
 <div class="button-group hollow align-right">
-    <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+    <% if session[:shuffle] %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, next_random_question_path(@question), class: 'button' %>
+    <% else %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+    <% end %>
 </div>
 <script>
 $(document).ready(function() {
