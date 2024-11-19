@@ -1,16 +1,10 @@
-<tr>
-    <td><%= category.name %></td>
-    <td><%= category.parent&.name %></td>
-    <td>
-        <div class="button-group">
-            <%= link_to 'View', category, class: "button" %>
-            <% if user_signed_in? %>
-                <%= link_to 'Edit', edit_category_path(category), class: "button" %>
-                <%= link_to 'Delete', category, class: "button", data: {
-                    turbo_confirm: 'Are you sure?',
-                    turbo_method: :delete
-                } %>
-            <% end %>
-        </div>
-    </td>
-</tr>
+<div class="button-group no-gaps secondary hollow small">
+    <%= link_to 'View', category, class: "button" %>
+    <% if user_signed_in? %>
+        <%= link_to 'Edit', edit_category_path(category), class: "button" %>
+        <%= link_to 'Delete', category, class: "button alert", data: {
+            turbo_confirm: 'Are you sure?',
+            turbo_method: :delete
+        } %>
+    <% end %>
+</div>
