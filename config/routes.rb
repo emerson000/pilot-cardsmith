@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   #   resources :questions
   # end
 
-  resources :categories
+  resources :categories do
+    resources :questions
+  end
   resources :questions do
     collection do
       get :shuffle

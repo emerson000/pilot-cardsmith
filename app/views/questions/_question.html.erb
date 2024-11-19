@@ -1,14 +1,25 @@
-<tr data-url="<%= question_url(question) %>">
+<tr data-url="<%= @category ? category_question_path(@category, question) : question_path(question) %>">
     <td><%= question.text %></td>
     <td>
         <div class="button-group hollow small no-gaps" style="margin: 0">
-            <%= link_to 'View', question_path(question), class: "button" %>
-            <% if user_signed_in? %>
-                <%= link_to 'Edit', edit_question_path(question), class: "button" %>
-                <%= link_to "<i class=\"fa-solid fa-trash\"></i> Delete".html_safe, question, class: "button alert", data: {
-                    turbo_confirm: 'Are you sure?',
-                    turbo_method: :delete
-                } %>
+            <% if @category %>
+                <%= link_to 'View', category_question_path(@category, question), class: "button" %>
+                <% if user_signed_in? %>
+                    <%= link_to 'Edit', edit_category_question_path(@category, question), class: "button" %>
+                    <%= link_to "<i class=\"fa-solid fa-trash\"></i> Delete".html_safe, category_question_path(@category, question), class: "button alert", data: {
+                        turbo_confirm: 'Are you sure?',
+                        turbo_method: :delete
+                    } %>
+                <% end %>
+            <% else %>
+                <%= link_to 'View', question_path(question), class: "button" %>
+                <% if user_signed_in? %>
+                    <%= link_to 'Edit', edit_question_path(question), class: "button" %>
+                    <%= link_to "<i class=\"fa-solid fa-trash\"></i> Delete".html_safe, question, class: "button alert", data: {
+                        turbo_confirm: 'Are you sure?',
+                        turbo_method: :delete
+                    } %>
+                <% end %>
             <% end %>
         </div>
     </td>

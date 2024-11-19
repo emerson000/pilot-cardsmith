@@ -1,4 +1,4 @@
-<%= simple_form_for @question, html: { id: 'question-form' } do |f| %>
+<%= simple_form_for @question, url: @form_url, html: { id: 'question-form' } do |f| %>
     <div class="button-group no-gaps">
         <%= f.button :submit, 'Save' %>
         <%= link_to 'Cancel', :back, class: 'button hollow' %>
