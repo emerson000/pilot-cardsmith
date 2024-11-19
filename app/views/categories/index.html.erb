@@ -1,17 +1,16 @@
 <h1>Categories</h1>
 <%= render 'layouts/flash' %>
 <%= user_signed_in? ? link_to('New Category', new_category_path, class: 'button') : '' %>
-<table>
+
+<table class="hover relaxed">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Parent</th>
             <th></th>
         </tr>
     </thead>
-
     <tbody>
-        <%= render @categories %>
+        <%= render_category_tree(@category_tree) %>
     </tbody>
 </table>
 <%= render 'layouts/shortcut_new', path: new_category_path %>

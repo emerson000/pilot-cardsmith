@@ -1,11 +1,24 @@
 class CategoriesController < ApplicationController
+  include ActionView::Helpers::TagHelper
   before_action :authenticate_user!, except: [ :index, :show ]
+
   def index
     @categories = Category.all
+    @category_tree = build_tree(@categories)
+  end
+
+  def build_tree(categories, parent_id = nil)
+    categories.select { |category| category.parent_id == parent_id }.map do |category|
+      {
+        category: category,
+        subcategories: build_tree(categories, category.id)
+      }
+    end
   end
 
   def show
     @category = Category.find(params[:id])
+    @questions = @category.questions
   end
 
   def new

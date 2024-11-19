@@ -1,8 +1,13 @@
 <h1><%= @question.text %></h1>
 <%= render 'layouts/flash' %>
 <div class="button-group hollow no-gaps">
-<%= link_to "<i class=\"fa-solid fa-chevron-left\"></i> Back".html_safe, questions_path, class: 'button align-right' %>
-<%= user_signed_in? ? link_to("<i class=\"fa-solid fa-pen\"></i> Edit".html_safe, edit_question_path(@question), class: 'button') : '' %>
+<% if @category %>
+    <%= link_to "<i class=\"fa-solid fa-chevron-left\"></i> Back".html_safe, category_path(@category), class: 'button align-right' %>
+    <%= user_signed_in? ? link_to("<i class=\"fa-solid fa-pen\"></i> Edit".html_safe, edit_category_question_path(@category, @question), class: 'button') : '' %>
+<% else %>
+    <%= link_to "<i class=\"fa-solid fa-chevron-left\"></i> Back".html_safe, questions_path, class: 'button align-right' %>
+    <%= user_signed_in? ? link_to("<i class=\"fa-solid fa-pen\"></i> Edit".html_safe, edit_question_path(@question), class: 'button') : '' %>
+<% end %>
 </div>
 <table class="hover">
 <% @question.answer_choices.shuffle.each_with_index do |answer, index| %>
@@ -30,7 +35,7 @@
     <% if session[:shuffle] %>
         <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, next_random_question_path(@question), class: 'button' %>
     <% else %>
-        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, question_url(@next_question), class: 'button' %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, @category ? category_question_path(@category, @next_question) : question_path(@next_question), class: 'button' %>
     <% end %>
 </div>
 <script>
