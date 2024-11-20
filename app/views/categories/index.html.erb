@@ -2,7 +2,7 @@
 <%= render 'layouts/flash' %>
 <%= user_signed_in? ? link_to('New Category', new_category_path, class: 'button') : '' %>
 
-<table class="hover relaxed">
+<table class="hover relaxed stack">
     <thead>
         <tr>
             <th>Name</th>
