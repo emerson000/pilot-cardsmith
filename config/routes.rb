@@ -24,13 +24,13 @@ Rails.application.routes.draw do
 
   resources :categories do
     resources :questions
+    member do
+      get :shuffle
+    end
   end
   resources :questions do
     collection do
       get :shuffle
-    end
-    member do
-      get "next_random"
     end
   end
   resources :sources
