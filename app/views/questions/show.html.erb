@@ -33,7 +33,9 @@
 <% end %>
 <div class="button-group hollow align-right">
     <% if session[:shuffle] %>
-        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, next_random_question_path(@question), class: 'button' %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, shuffle_questions_path, class: 'button' %>
+    <% elsif session[:shuffle_category] %>
+        <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, @category ?  shuffle_category_path(@category) : question_path(@next_question), class: 'button' %>
     <% else %>
         <%= link_to "Next&nbsp;&nbsp;<i class=\"fa-solid fa-chevron-right\"></i>".html_safe, @category ? category_question_path(@category, @next_question) : question_path(@next_question), class: 'button' %>
     <% end %>

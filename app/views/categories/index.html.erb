@@ -2,15 +2,32 @@
 <%= render 'layouts/flash' %>
 <%= user_signed_in? ? link_to('New Category', new_category_path, class: 'button') : '' %>
 
-<table class="hover relaxed stack">
+<table class="hover relaxed limit-text">
+    <colgroup>
+        <col style="width: auto;">
+        <col style="width: 12rem;" class="show-for-medium">
+    </colgroup>
     <thead>
         <tr>
             <th>Name</th>
-            <th></th>
+            <th class="show-for-medium"></th>
         </tr>
     </thead>
     <tbody>
         <%= render_category_tree(@category_tree) %>
     </tbody>
 </table>
+<script>
+    $(document).ready(function() {
+        $('tr[data-url]').on('click', function(event) {
+        if ($(event.target).is('a')) {
+            return;
+        }
+        var url = $(this).data('url');
+        if (url) {
+            window.location.href = url;
+        }
+    });
+    });
+</script>
 <%= render 'layouts/shortcut_new', path: new_category_path %>

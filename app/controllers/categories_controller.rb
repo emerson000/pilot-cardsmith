@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
+    reset_shuffle
     @categories = Category.all
     @category_tree = build_tree(@categories)
   end
@@ -17,8 +18,23 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    reset_shuffle
     @category = Category.find(params[:id])
     @questions = @category.questions
+  end
+
+  def shuffle
+    @category = Category.find(params[:id])
+    session[:shuffle_category] = true
+    last_question_ids = session[:last_shuffled_question_ids] || []
+    random_question = @category.questions.where.not(id: last_question_ids).order("RANDOM()").first
+    session[:last_shuffled_question_ids] ||= []
+    session[:last_shuffled_question_ids] << random_question.id if random_question
+    if random_question
+      redirect_to category_question_path(@category, random_question)
+    else
+      redirect_to category_path(@category), alert: "No more questions available to shuffle."
+    end
   end
 
   def new
@@ -55,5 +71,13 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :parent_id)
+  end
+
+  private
+
+  def reset_shuffle
+    session[:shuffle_category] = false
+    session[:shuffle] = false
+    session[:last_shuffled_question_ids] = []
   end
 end

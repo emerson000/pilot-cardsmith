@@ -30,9 +30,20 @@ a.button i {
 }
 
 table {
+
+    &.limit-text {
+        table-layout: fixed;
+    }
+
     .button-group {
         margin-top: 0.25rem;
         margin-bottom: 0.25rem;
+    }
+
+    td.limit-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

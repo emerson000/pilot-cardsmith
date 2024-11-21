@@ -1,6 +1,6 @@
 <div class="button-group no-gaps">
     <%= user_signed_in? ? link_to('New Question', @category ? new_category_question_path(@category) : new_question_path, class: 'button') : '' %>
-    <%= link_to '<i class="fa-solid fa-shuffle"></i> Shuffle'.html_safe, shuffle_questions_path, class: 'button hollow secondary' %>
+    <%= link_to '<i class="fa-solid fa-shuffle"></i> Shuffle'.html_safe, @category ? shuffle_category_path(@category) : shuffle_questions_path, class: 'button hollow secondary' %>
 </div>
 <style>
     tr[data-url] {

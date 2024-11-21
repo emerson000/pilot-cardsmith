@@ -1,10 +1,10 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show, :shuffle, :next_random ]
+  before_action :authenticate_user!, except: [ :index, :show, :shuffle ]
   before_action :set_category
   before_action :set_question, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    session[:shuffle] = false
+    reset_shuffle
     if @category
       @questions = @category.questions
     else
@@ -25,14 +25,15 @@ class QuestionsController < ApplicationController
 
   def shuffle
     session[:shuffle] = true
-    random_question = Question.order("RANDOM()").first
-    redirect_to @category ? category_question_path(@category, next_question) : question_path(random_question)
-  end
-
-  def next_random
-    current_question = Question.find(params[:id])
-    next_question = Question.where.not(id: current_question.id).order("RANDOM()").first
-    redirect_to (@category ? category_question_path(@category, next_question) : question_path(next_question))
+    last_question_ids = session[:last_shuffled_question_ids] || []
+    random_question = Question.where.not(id: last_question_ids).order("RANDOM()").first
+    session[:last_shuffled_question_ids] ||= []
+    session[:last_shuffled_question_ids] << random_question.id if random_question
+    if random_question
+      redirect_to @category ? category_question_path(@category, next_question) : question_path(random_question)
+    else
+      redirect_to questions_path, alert: "No more questions available to shuffle."
+    end
   end
 
   def new
@@ -112,5 +113,11 @@ class QuestionsController < ApplicationController
     ).tap do |whitelisted|
       whitelisted[:answer_choices_attributes].reject! { |_, v| v["text"].blank? }
     end
+  end
+
+  def reset_shuffle
+    session[:shuffle_category] = false
+    session[:shuffle] = false
+    session[:last_shuffled_question_ids] = []
   end
 end
