@@ -10,4 +10,12 @@ class Category < ApplicationRecord
 
   # Ensure name is present
   validates :name, presence: true
+
+  def all_questions
+    Question.joins(:question_categories).where(question_categories: { category_id: all_subcategory_ids })
+  end
+
+  def all_subcategory_ids
+    [ id ] + subcategories.flat_map(&:all_subcategory_ids)
+  end
 end
