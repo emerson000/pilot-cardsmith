@@ -20,14 +20,14 @@ class CategoriesController < ApplicationController
   def show
     reset_shuffle
     @category = Category.find(params[:id])
-    @questions = @category.questions
+    @questions = @category.all_questions
   end
 
   def shuffle
     @category = Category.find(params[:id])
     session[:shuffle_category] = true
     last_question_ids = session[:last_shuffled_question_ids] || []
-    random_question = @category.questions.where.not(id: last_question_ids).order("RANDOM()").first
+    random_question = @category.all_questions.where.not(id: last_question_ids).order("RANDOM()").first
     session[:last_shuffled_question_ids] ||= []
     session[:last_shuffled_question_ids] << random_question.id if random_question
     if random_question

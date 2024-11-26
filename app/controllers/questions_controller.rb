@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   def index
     reset_shuffle
     if @category
-      @questions = @category.questions
+      @questions = @category.all_questions
     else
       @questions = Question.all
     end
@@ -15,8 +15,8 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     if @category
-      @next_question = @category.questions.where("questions.id > ?", @question.id).order(:id).first
-      @next_question ||= @category.questions.order(:id).first
+      @next_question = @category.all_questions.where("questions.id > ?", @question.id).order(:id).first
+      @next_question ||= @category.all_questions.order(:id).first
     else
       @next_question = Question.where("questions.id > ?", @question.id).order(:id).first
       @next_question ||= Question.order(:id).first
@@ -26,13 +26,17 @@ class QuestionsController < ApplicationController
   def shuffle
     session[:shuffle] = true
     last_question_ids = session[:last_shuffled_question_ids] || []
-    random_question = Question.where.not(id: last_question_ids).order("RANDOM()").first
+    if @category
+      random_question = @category.all_questions.where.not(id: last_question_ids).order("RANDOM()").first
+    else
+      random_question = Question.where.not(id: last_question_ids).order("RANDOM()").first
+    end
     session[:last_shuffled_question_ids] ||= []
     session[:last_shuffled_question_ids] << random_question.id if random_question
     if random_question
-      redirect_to @category ? category_question_path(@category, next_question) : question_path(random_question)
+      redirect_to @category ? category_question_path(@category, random_question) : question_path(random_question)
     else
-      redirect_to questions_path, alert: "No more questions available to shuffle."
+      redirect_to @category ? category_questions_path(@category) : questions_path, alert: "No more questions available to shuffle."
     end
   end
 
@@ -97,7 +101,7 @@ class QuestionsController < ApplicationController
   def set_question
     if params[:category_id]
       @category = Category.find(params[:category_id])
-      @question = @category.questions.find(params[:id])
+      @question = @category.all_questions.find(params[:id])
     else
       @question = Question.find(params[:id])
     end
