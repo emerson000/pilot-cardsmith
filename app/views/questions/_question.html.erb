@@ -1,6 +1,6 @@
 <tr data-url="<%= @category ? category_question_path(@category, question) : question_path(question) %>">
-    <td><%= question.text %></td>
-    <td>
+    <td class="limit-text"><%= question.text %></td>
+    <td class="show-for-medium">
         <div class="button-group hollow small no-gaps align-right show-for-medium" style="margin: 0">
             <% if @category %>
                 <%= link_to 'View', category_question_path(@category, question), class: "button" %>
