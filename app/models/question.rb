@@ -7,4 +7,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :question_categories, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :question_sources, reject_if: :all_blank, allow_destroy: true
   validates :text, presence: true
+
+  def as_json(options = {})
+    super(options.merge(include: { categories: { only: :id }, answer_choices: { only: [ :id, :text, :is_correct ] } }))
+  end
 end

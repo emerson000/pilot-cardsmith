@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
 
-  # namespace :api do
-  #   resources :categories
-  #   resources :sources
-  #   resources :questions
-  # end
+  namespace :api do
+    resources :categories
+    resources :sources
+    resources :questions
+  end
 
   resources :categories do
     resources :questions

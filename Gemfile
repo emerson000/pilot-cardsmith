@@ -55,7 +55,7 @@ group :test do
   gem "fiddle"
 end
 
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.10.15"
 
 gem "importmap-rails", "~> 2.0"
 

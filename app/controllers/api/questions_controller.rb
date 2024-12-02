@@ -1,7 +1,9 @@
 class Api::QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index, :show ]
+
   def index
     questions = Question.all
-    render json: questions
+    render json: questions.as_json
   end
 
   def show
