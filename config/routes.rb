@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   namespace :api do
-    resources :categories
+    resources :categories do
+      resources :questions
+    end
     resources :sources
     resources :questions
   end
