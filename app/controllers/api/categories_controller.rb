@@ -1,4 +1,6 @@
 class Api::CategoriesController < ApplicationController
+    before_action :authenticate_user!, except: [ :index, :show ]
+
     def index
         categories = Category.where(parent: nil).all
         render json: categories

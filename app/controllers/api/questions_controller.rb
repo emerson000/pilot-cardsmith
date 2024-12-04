@@ -1,7 +1,14 @@
 class Api::QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :set_category, only: [ :index ]
+
   def index
-    questions = Question.all
-    render json: questions
+    if @category
+      questions = @category.all_questions
+    else
+      questions = Question.all
+    end
+    render json: questions.as_json
   end
 
   def show
@@ -37,5 +44,9 @@ class Api::QuestionsController < ApplicationController
 
   def question_params
       params.require(:question).permit(:text, :explanation, answer_choices_attributes: [ :id, :text, :is_correct, :_destroy ])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id]) if params[:category_id]
   end
 end
