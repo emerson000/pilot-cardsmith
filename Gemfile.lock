@@ -121,7 +121,7 @@ GEM
       rails (>= 3.0.0)
     drb (2.2.1)
     erubi (1.13.0)
-    fiddle (1.1.5)
+    fiddle (1.1.6)
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-protobuf (4.28.3-x64-mingw-ucrt)
