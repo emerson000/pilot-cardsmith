@@ -57,7 +57,7 @@ end
 
 gem "active_model_serializers", "~> 0.10.15"
 
-gem "importmap-rails", "~> 2.0"
+gem "importmap-rails", "~> 2.1"
 
 gem "simple_form"
 
